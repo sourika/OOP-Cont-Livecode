@@ -9,14 +9,14 @@ class Plant:
     def water(self, water_amount):
         self.water_level += water_amount
 
-        return f"{self.name} has been watered: {self.water_level} "
+        return f"{self.name} has been watered: {self.water_level}"
     
     def check_growth_stage(self):
         growth_stage = None
 
-        if self._water_level > 5 and self._sunlight_hours > 5:
+        if self.water_level > 5 and self.sunlight_hours > 5:
             growth_stage = "Sprout"
-        if self._water_level > 10 and self._sunlight_hours > 10:
+        if self.water_level > 10 and self.sunlight_hours > 10:
             growth_stage = "Mature"
         
         return f"{self.name} is currently at the {growth_stage} stage."
@@ -27,6 +27,6 @@ class Plant:
         return f"{self.name} has received a total of {hours}. New sunlight level: {self.sunlight_hours}"
     
     def __repr__(self):
-        return f"Plant(name='{self.name}', origin='{self.origin}', water_level={self._water_level}, sunlight_hours={self._sunlight_hours}, is_blooming={self.is_blooming})"
+        return f"Plant(name='{self.name}', origin='{self.origin}', water_level={self.water_level}, sunlight_hours={self.sunlight_hours}, is_blooming={self.is_blooming})"
 
     
