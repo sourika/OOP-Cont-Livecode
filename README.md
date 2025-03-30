@@ -5,7 +5,7 @@ This repository is the livecode for the Intro to OOP, Con't roundtable.
 Design a class that models a Plant:
 
 - `Plant` basic information: 
-  - `name`: A **string** representing the name of a plant.
+  - `name`: A string representing the name of a plant.
   - `water_level`: The amount of water a plant has received represented by an **integer**.
   - `sunlight_hours`: The total hours of sunlight a plant needs in a day (**integer**).
   - `is_blooming`: A boolean value representing if a plant is blooming, has a default value of **False**.
