@@ -1,50 +1,170 @@
 from classes.plant import Plant
 
-def test_plant_initialization():
-    # Act
-    plant_rose = Plant(name="Rose", water_level=5, sunlight_hours=6, is_blooming=True)
-    plant_cactus = Plant(name="Cactus", water_level=1, sunlight_hours=12)
-
-    # Assert
-    assert plant_rose.name == "Rose"
-    assert plant_rose.water_level == 5
-    assert plant_rose.sunlight_hours == 6
-    assert plant_rose.is_blooming == True
-
-    assert plant_cactus.name == "Cactus"
-    assert plant_cactus.water_level == 1
-    assert plant_cactus.sunlight_hours == 12
-    assert plant_cactus.is_blooming == False
-
-
-def test_plant_watering():
+def test_plant_class_instantiation():
     # Arrange
-    plant_bamboo = Plant(name="Bamboo", water_level=4, sunlight_hours=6)
+    name = "Fern"
+    water_level = 4
+    sunlight_hours = 5
+    is_blooming = False
 
     # Act
-    result_bamboo = plant_bamboo.water(3)
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+       is_blooming
+    )
 
     # Assert
-    assert plant_bamboo.water_level == 7
-    assert result_bamboo == "Bamboo has been watered: 7"
+    assert plant.name == name
+    assert plant.water_level == water_level
+    assert plant.sunlight_hours == sunlight_hours
+    assert plant.is_blooming == False
 
-def test_plant_sunlight():
+def test_plant_class_instantiation_default_is_blooming():
     # Arrange
-    plant_sunflower = Plant(name="Sunflower", water_level=5, sunlight_hours=8)
+    name = "Orchid"
+    water_level = 4
+    sunlight_hours = 5
 
     # Act
-    result_sunflower = plant_sunflower.give_sunglight(4)
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+    )
 
     # Assert
-    assert plant_sunflower.sunlight_hours == 12
-    assert result_sunflower == "Sunflower has received a total of 4. New sunlight level: 12"
+    assert plant.name == name
+    assert plant.water_level == water_level
+    assert plant.sunlight_hours == sunlight_hours
+    assert plant.is_blooming == False
 
-def test_plant_growth_stage():
+def test_change_water_increases_water_level():
     # Arrange
-    plant_cactus = Plant(name="Cactus", water_level=12, sunlight_hours=15)
+    name = "Oxalis"
+    water_level = 2
+    sunlight_hours = 7
+    is_blooming = True
+
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+       is_blooming
+    )
 
     # Act
-    result_cactus = plant_cactus.check_growth_stage()
+    result = plant.change_water(3)
 
     # Assert
-    assert result_cactus == "Cactus is currently at the Mature stage."
+    assert result == 5
+    assert plant.water_level == 5
+
+def test_change_water_decreases_water_level():
+    # Arrange
+    name = "Oxalis"
+    water_level = 2
+    sunlight_hours = 7
+    is_blooming = True
+
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+       is_blooming
+    )
+
+    # Act
+    result = plant.change_water(-1)
+
+    # Assert
+    assert result == 1
+    assert plant.water_level == 1
+
+def test_change_sunlight_increases_decreases_sunlight_hours():
+    # Arrange
+    name = "Air Plant"
+    water_level = 2
+    sunlight_hours = 6
+
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+    )
+
+    # Act
+    plant.change_sunlight(2)
+    result = plant.change_sunlight(-3)
+
+    # Assert
+    assert result == 5
+    assert plant.sunlight_hours == 5
+
+def test_check_growth_water_sunlight_under_five():
+    # Arrange
+    name = "Money Tree"
+    water_level = 2
+    sunlight_hours = 3
+    is_blooming = False
+
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+       is_blooming
+    )
+
+    # Act
+    result = plant.check_growth()
+
+    # Assert
+    assert result == "Money Tree's growth stage: Sprout"
+    assert plant.water_level == water_level
+    assert plant.sunlight_hours == sunlight_hours 
+
+def test_check_growth_water_sunlight_over_five():
+    # Arrange
+    name = "Purple Trumpet"
+    water_level = 8
+    sunlight_hours = 6
+    is_blooming = False
+
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+       is_blooming
+    )
+
+    # Act
+    result = plant.check_growth()
+
+    # Assert
+    assert result == "Purple Trumpet's growth stage: Mature"
+    assert plant.water_level == water_level
+    assert plant.sunlight_hours == sunlight_hours
+    assert not plant.is_blooming  
+
+def test_check_growth_plant_is_blooming():
+    # Arrange
+    name = "Money Tree"
+    water_level = 2
+    sunlight_hours = 6
+    is_blooming = True
+
+    plant = Plant(
+       name,
+       water_level,
+       sunlight_hours,
+       is_blooming
+    )
+
+    # Act
+    result = plant.check_growth()
+
+    # Assert
+    assert result == "Money Tree's growth stage: Mature"
+    assert plant.water_level == water_level
+    assert plant.sunlight_hours == sunlight_hours

@@ -1,26 +1,27 @@
 class Plant:
+
+# Write your plant class here!
     def __init__(self, name, water_level, sunlight_hours, is_blooming=False):
         self.name = name
         self.water_level = water_level
         self.sunlight_hours = sunlight_hours
         self.is_blooming = is_blooming
     
-    def water(self, water_amount):
-        self.water_level += water_amount
+    def change_water(self, water):
+        self.water_level += water
 
-        return f"{self.name} has been watered: {self.water_level}"
+        return self.water_level
     
-    def check_growth_stage(self):
-        growth_stage = None
+    def change_sunlight(self, light):
+        self.sunlight_hours += light
 
-        if self.water_level > 5 and self.sunlight_hours > 5:
+        return self.sunlight_hours
+    
+    def check_growth(self):
+        growth_stage = "Sprout"
+        sunlight_water_over_five = self.sunlight_hours + self.water_level > 12
+
+        if self.is_blooming or sunlight_water_over_five:
             growth_stage = "Mature"
-        else:
-            growth_stage = "Sprout"
         
-        return f"{self.name} is currently at the {growth_stage} stage."
-    
-    def give_sunglight(self, hours):
-        self.sunlight_hours += hours
-
-        return f"{self.name} has received a total of {hours}. New sunlight level: {self.sunlight_hours}"
+        return f"{self.name}'s growth stage: {growth_stage}"
