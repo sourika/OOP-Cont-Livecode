@@ -2,7 +2,7 @@
 This repository is the livecode for the Intro to OOP, Con't roundtable. 
 
 ## Instructions
-Design a class that models a Plant:
+A class that models a Plant:
 
 - `Plant` attributes: 
   - `name`: A string representing the name of a plant.
